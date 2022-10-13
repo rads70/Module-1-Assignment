@@ -13,6 +13,16 @@ namespace Module_1_Assignment.Characters
         public int Intelligence { get; set; }
         public int Vitality { get; set; }
 
+        public static PrimaryAttribute operator + (PrimaryAttribute lhs, PrimaryAttribute rhs)
+        {
+            return new PrimaryAttribute 
+            { 
+                Intelligence = lhs.Intelligence+rhs.Intelligence, 
+                Strength = lhs.Strength + rhs.Strength, 
+                Dexterity = lhs.Dexterity + rhs.Dexterity,
+                Vitality = lhs.Vitality + rhs.Vitality
+            };  
+        }
 
     }
 }

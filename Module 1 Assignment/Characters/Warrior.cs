@@ -21,23 +21,17 @@ namespace Module_1_Assignment.Characters
             PrimaryAttributes.Intelligence = 1;
 
             CalculateTotalAttributes();
-            CalculateWeaponAttributes();
         }
 
         public override void CalculateWeaponAttributes()
         {
-            Weapon weapon = (Weapon)Items.EquipmentItems[Slot.Weapon];
+            Weapon weapon = Items.GetWeapon();
 
 
             if (weapon.WeaponDPS() == 0)
                 DPS = ((double)TotalPrimaryAttributes.Strength / 100 + 1);
             else
                 DPS = (weapon.WeaponDPS() * ((double)TotalPrimaryAttributes.Strength / 100 + 1));
-        }
-
-        public override void CalculateElementalResistance()
-        {
-            SecondaryAttributes.ElementalResistance = TotalPrimaryAttributes.Strength;
         }
 
         public override void LevelUp(int levels)
@@ -56,7 +50,8 @@ namespace Module_1_Assignment.Characters
 
         public override string Equip(Weapon weapon)
         {
-            CheckRequiredLevel(weapon);
+            //CheckRequiredLevel(weapon);
+            RequiredLevel.CheckLevel(weapon, this.Level);
 
             if (weapon.WeaponType == Weapons.Axe || weapon.WeaponType == Weapons.Hammer || weapon.WeaponType == Weapons.Sword)
             {
@@ -70,12 +65,12 @@ namespace Module_1_Assignment.Characters
 
         public override string Equip(Armour armour)
         {
-            CheckRequiredLevel(armour);
+            RequiredLevel.CheckLevel(armour, this.Level);
 
             if (armour.ArmourType == Armours.Mail || armour.ArmourType == Armours.Plate)
             {
                 Items.AddItem(armour);
-                CalculateArmourAttributes();
+                CalculateTotalAttributes();
             }
             else
                 throw new InvalidArmourException("Wrong armour type for Warrior");

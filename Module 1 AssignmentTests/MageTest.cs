@@ -24,33 +24,7 @@ namespace Module_1_AssignmentTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void LevelUp_IncreaseCharactherLevel_ShouldReturnCharactherLevelOf2()
-        {
-            // Arrange
-            Mage mage = new Mage();
-            mage.LevelUp(1);
-            int expected = 2;
-
-            // Act
-            int actual = mage.Level;
-
-            // Assert
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(-1)]
-        public void LevelUp_UseLevelUpFunctionWithArgument_ShouldThrowArgumentException(int levels)
-        {
-            // Arrange
-            Mage mage = new Mage();
-
-            // Act and Assert
-            Assert.Throws<ArgumentException>(() => mage.LevelUp(levels));
-           
-        }
+        
 
         [Fact]
         public void Constructor_MageCreatedWithAttributes_ShouldResultInCorrectVitalityAttributeForLevel1()
@@ -121,16 +95,129 @@ namespace Module_1_AssignmentTests
         }
 
         [Fact]
-        public void ClassAttributes_LevelUpMage_ShouldReturnIncreasedVitalityAttribute()
+        public void LevelUp_IncreaseCharactherLevel_ShouldReturnCharactherLevelOf2()
+        {
+            // Arrange
+            Mage mage = new Mage();
+            mage.LevelUp(1);
+            int expected = 2;
+
+            // Act
+            int actual = mage.Level;
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void LevelUp_UseLevelUpFunctionWithArgument_ShouldThrowArgumentException(int levels)
+        {
+            // Arrange
+            Mage mage = new Mage();
+
+            // Act and Assert
+            Assert.Throws<ArgumentException>(() => mage.LevelUp(levels));
+
+        }
+
+        [Fact]
+        public void LevelUp_LevelUpMage_ShouldReturnIncreasedVitalityAttribute()
         {
             // Arrange
             var mage = new Mage();
-            mage.LevelUp(1);
             var vitality = 8;
             int expected = vitality;
 
             // Act
+            mage.LevelUp(1);
             int actual = mage.PrimaryAttributes.Vitality;
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void LevelUp_LevelUpMage_ShouldReturnIncreasedStrengthAttribute()
+        {
+            // Arrange
+            var mage = new Mage();
+            var strength = 2;
+            int expected = strength;
+
+            // Act
+            mage.LevelUp(1);
+            int actual = mage.PrimaryAttributes.Strength;
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void LevelUp_LevelUpMage_ShouldReturnIncreasedDexterityhAttribute()
+        {
+            // Arrange
+            var mage = new Mage();
+            var dexterity = 2;
+            int expected = dexterity;
+
+            // Act
+            mage.LevelUp(1);
+            int actual = mage.PrimaryAttributes.Dexterity;
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void LevelUp_LevelUpMage_ShouldReturnIncreasedIntelligencehAttribute()
+        {
+            // Arrange
+            var mage = new Mage();
+            var intelligence = 13;
+            int expected = intelligence;
+
+            // Act
+            mage.LevelUp(1);
+            int actual = mage.PrimaryAttributes.Intelligence;
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void LevelUp_SecondaryAttributesIncreaseOnLevelUp_ShouldReturnIncreasedSecondaryAttributeHealth()
+        {
+            // Arrange
+            var mage = new Mage();
+            var health = 80;
+            int expected = health;
+
+            // Act
+            mage.LevelUp(1);
+            int actual = mage.SecondaryAttributes.Health;
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void LevelUp_SecondaryAttributesIncreaseOnLevelUp_ShouldReturnIncreasedSecondaryAttributeArmourRating()
+        {
+            // Arrange
+            var mage = new Mage();
+            var strength = 4;
+            int expected = strength;
+
+            // Act
+            mage.LevelUp(1);
+            int actual = mage.SecondaryAttributes.ArmourRating;
 
             // Assert
 
@@ -138,19 +225,17 @@ namespace Module_1_AssignmentTests
         }
 
 
-
-
         [Fact]
-        public void LevelUp_SecondaryAttributesIncreaseOnLevelUp_ShouldReturnIncreasedSecondaryAttributes()
+        public void LevelUp_SecondaryAttributesIncreaseOnLevelUp_ShouldReturnIncreasedSecondaryAttributeElementalResistance()
         {
             // Arrange
             var mage = new Mage();
-            mage.LevelUp(1);
-            var health = 80;
-            int expected = health;
+            var intelligence = 13;
+            int expected = intelligence;
 
             // Act
-            int actual = mage.SecondaryAttributes.Health;
+            mage.LevelUp(1);
+            int actual = mage.SecondaryAttributes.ElementalResistance;
 
             // Assert
 

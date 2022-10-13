@@ -19,22 +19,16 @@ namespace Module_1_Assignment.Characters
             PrimaryAttributes.Intelligence = 1;
 
             CalculateTotalAttributes();
-            CalculateWeaponAttributes();
-     
+            
         }
 
         public override void CalculateWeaponAttributes()
         {
-            Weapon weapon = (Weapon)Items.EquipmentItems[Slot.Weapon];
+            Weapon weapon = (Weapon)Items.GetWeapon();
             if (weapon.WeaponDPS() == 0)
                 DPS = ((double)TotalPrimaryAttributes.Dexterity / 100 + 1);
             else
                 DPS = (weapon.WeaponDPS() * ((double)TotalPrimaryAttributes.Dexterity / 100 + 1));
-        }
-
-        public override void CalculateElementalResistance()
-        {
-            SecondaryAttributes.ElementalResistance = TotalPrimaryAttributes.Dexterity;
         }
         public override void LevelUp(int levels)
         {
@@ -52,7 +46,7 @@ namespace Module_1_Assignment.Characters
 
         public override string Equip(Weapon weapon)
         {
-            CheckRequiredLevel(weapon);
+            RequiredLevel.CheckLevel(weapon, this.Level);
 
             if (weapon.WeaponType == Weapons.Dagger || weapon.WeaponType == Weapons.Sword)
             {
@@ -67,12 +61,12 @@ namespace Module_1_Assignment.Characters
 
         public override string Equip(Armour armour)
         {
-            CheckRequiredLevel(armour);
+            RequiredLevel.CheckLevel(armour, this.Level);
 
             if (armour.ArmourType == Armours.Mail || armour.ArmourType == Armours.Leather)
             {
                 Items.AddItem(armour);
-                CalculateArmourAttributes();
+                CalculateTotalAttributes();
             }
             else
                 throw new InvalidArmourException("Wrong armour type for Rogue");

@@ -224,7 +224,7 @@ namespace Module_1_AssignmentTests
 
             // Act
             warrior.Items.AddItem(expected);
-            var actual = warrior.Items.EquipmentItems[Slot.Weapon];
+            var actual = warrior.Items.GetWeapon();
             // Assert
             Assert.Equal(expected, actual);
         }
@@ -296,7 +296,7 @@ namespace Module_1_AssignmentTests
 
             // Act
             warrior.Items.AddItem(expected);
-            var actual = warrior.Items.EquipmentItems[Slot.Body];
+            var actual = warrior.Items.GetArmour(Slot.Body);
 
             // Assert
             Assert.Equal(expected, actual);

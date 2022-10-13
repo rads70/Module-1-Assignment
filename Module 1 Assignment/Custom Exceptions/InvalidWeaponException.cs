@@ -8,7 +8,6 @@ namespace Module_1_Assignment.Custom_Exceptions
 {
     public class InvalidWeaponException : Exception
     {
-
         public InvalidWeaponException(string message) : base(message)
         {
            

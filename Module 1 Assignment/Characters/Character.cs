@@ -20,26 +20,32 @@ namespace Module_1_Assignment.Characters
 
         public Equipment Items = new Equipment();
 
+        /// <summary>
+        /// Levels up character and increases characters primary attributes
+        /// </summary>
+        /// <param name="levels"></param>
         public abstract void LevelUp(int levels);
 
+        /// <summary>
+        /// Equips character with armour replacing any armour in current slot.
+        /// Throws InvalidArmourException for invalid armour for character
+        /// </summary>
+        /// <param name="armour"></param>
+        /// <returns>Message if equipped</returns>
         public abstract string Equip (Armour armour);
 
+        /// <summary>
+        /// Equips character with weapon replacing any weapon in weapon slot
+        /// Throws InvalidWeaponException for invalid weapon for character
+        /// </summary>
+        /// <param name="weapon"></param>
+        /// <returns>Message if equipped</returns>
         public abstract string Equip (Weapon weapon);
 
+        /// <summary>
+        /// Calculates Character DPS based on Class and Weapon
+        /// </summary>
         public abstract void CalculateWeaponAttributes();
-
-        public abstract void CalculateElementalResistance();
-
-        protected void CheckRequiredLevel(Item item)
-        {
-            if (item.RequiredLevel > this.Level)
-            {
-                if(typeof(Weapon).IsInstanceOfType(item))
-                    throw new InvalidWeaponException("Weapon level is higher than character level");
-                else
-                    throw new InvalidArmourException("Armour level is higher than character level");
-            }
-        }
 
         public void PrintStats()
         {
@@ -57,57 +63,27 @@ namespace Module_1_Assignment.Characters
             Console.WriteLine(sb);
         }
 
+        /// <summary>
+        /// Calculates Total attributes for character
+        /// Primary, Secondary and Character DPS
+        /// </summary>
         public void CalculateTotalAttributes()
         {
-            TotalPrimaryAttributes.Vitality = PrimaryAttributes.Vitality;
-            TotalPrimaryAttributes.Strength = PrimaryAttributes.Strength;
-            TotalPrimaryAttributes.Dexterity = PrimaryAttributes.Dexterity;
-            TotalPrimaryAttributes.Intelligence = PrimaryAttributes.Intelligence;
 
-            CalculateSecondaryAttributes();
-            CalculateElementalResistance();
+            PrimaryAttribute armourAttributes = new PrimaryAttribute();
 
-            /// <summary>
-            /// Calculates Total attributes from PrimaryAttributes on initialization and level up
-            /// </summary>
-        }
+            armourAttributes = Items.GetArmour(Slot.Head).PrimaryAttributes + Items.GetArmour(Slot.Legs).PrimaryAttributes + Items.GetArmour(Slot.Body).PrimaryAttributes;
 
-        public void CalculateSecondaryAttributes()
-        {
+            TotalPrimaryAttributes =  PrimaryAttributes + armourAttributes;
+
             SecondaryAttributes.Health = TotalPrimaryAttributes.Vitality * 10;
             SecondaryAttributes.ArmourRating = TotalPrimaryAttributes.Strength + TotalPrimaryAttributes.Dexterity;
+            SecondaryAttributes.ElementalResistance = TotalPrimaryAttributes.Intelligence;
 
-            /// <summasy>
-            /// 
-            /// </summasy>
-        }
-
-        public void CalculateArmourAttributes()
-        {
-            foreach (var item in Items.EquipmentItems.Values)
-            {
-                if (item.GetType() == typeof(Armour))
-                {
-                    Armour armour = item as Armour;
-
-                    TotalPrimaryAttributes.Vitality += armour.PrimaryAttributes.Vitality;
-                    TotalPrimaryAttributes.Strength += armour.PrimaryAttributes.Strength;
-                    TotalPrimaryAttributes.Dexterity += armour.PrimaryAttributes.Dexterity;
-                    TotalPrimaryAttributes.Intelligence += armour.PrimaryAttributes.Intelligence;
-
-                    
-                }
-                
-            }
-            CalculateSecondaryAttributes();
-            CalculateElementalResistance();
             CalculateWeaponAttributes();
+
         }
-
-         
-       
-
-       
+ 
         
     }
 }
