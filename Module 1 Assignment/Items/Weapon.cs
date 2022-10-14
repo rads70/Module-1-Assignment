@@ -14,6 +14,10 @@ namespace Module_1_Assignment.Items
 
         public WeaponAttributes WeaponAttributes =new WeaponAttributes();
 
+        /// <summary>
+        /// Calculates the weapon DPS
+        /// </summary>
+        /// <returns>Weapon DPS</returns>
        public double WeaponDPS()
         {
             return WeaponAttributes.Damage * WeaponAttributes.AttackSpeed;

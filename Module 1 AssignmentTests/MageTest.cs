@@ -10,6 +10,7 @@ namespace Module_1_AssignmentTests
 {
     public class MageTest
     {
+        #region Constructor
         [Fact]
         public void Constructor_CreateMageCharacter_ShouldHaveLevelAt1()
         {
@@ -61,12 +62,12 @@ namespace Module_1_AssignmentTests
         }
 
         [Fact]
-        public void Constructor_MageCreatedWithAttributes_ShouldResultInCorrectDextreityAttributeForLevel1()
+        public void Constructor_MageCreatedWithAttributes_ShouldResultInCorrectDexterityAttributeForLevel1()
         {
             // Arrange
             var mage = new Mage();
-            var dextreity = 1;
-            int expected = dextreity;
+            var dexterity = 1;
+            int expected = dexterity;
 
             // Act
             int actual = mage.PrimaryAttributes.Dexterity;
@@ -93,16 +94,19 @@ namespace Module_1_AssignmentTests
             Assert.Equal(expected, actual);
 
         }
+        #endregion
+
+        #region Level Up
 
         [Fact]
         public void LevelUp_IncreaseCharactherLevel_ShouldReturnCharactherLevelOf2()
         {
             // Arrange
             Mage mage = new Mage();
-            mage.LevelUp(1);
             int expected = 2;
 
             // Act
+            mage.LevelUp(1);
             int actual = mage.Level;
 
             // Assert
@@ -241,5 +245,7 @@ namespace Module_1_AssignmentTests
 
             Assert.Equal(expected, actual);
         }
+
+        #endregion
     }
 }

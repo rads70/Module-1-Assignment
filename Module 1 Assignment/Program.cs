@@ -25,10 +25,7 @@ namespace Module_1_Assignment
           
             Armour armour = new Armour() { ArmourType = Armours.Cloth, PrimaryAttributes = new PrimaryAttribute() { Vitality = 2,  Intelligence = 1 }, Name = "Head cloth", RequiredLevel = 1, Slot = Slot.Head };
             
-           
-            
             mage.Equip( armour);
-
 
             Console.WriteLine("");
             mage.PrintStats();

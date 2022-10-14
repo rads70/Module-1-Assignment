@@ -130,6 +130,35 @@ namespace Module_1_AssignmentTests
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void Equip_EquipWarriorWithArmour_ShouldReturnIncreasedTotalPrimaryAttributeVitality()
+        {
+            // Arrange
+
+            Warrior warrior = new Warrior();
+            Armour testPlateBody = new Armour()
+            {
+                Name = "Common plate body armour",
+                RequiredLevel = 1,
+                Slot = Slot.Body,
+                ArmourType = Armours.Plate,
+                PrimaryAttributes = new PrimaryAttribute() { Vitality = 2, Strength = 1 }
+            };
+
+            int initialValue = 10;
+            int addedValue = 2;
+            int expected = initialValue + addedValue;
+
+            // Act
+            warrior.Equip(testPlateBody);
+            int actual = warrior.TotalPrimaryAttributes.Vitality;
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+       
+
         #endregion
 
         #region Calculate DPS
@@ -205,30 +234,6 @@ namespace Module_1_AssignmentTests
 
         }
 
-        #endregion
-
-        [Fact]
-        public void AddItem_AddItemToWarriorWithWeapon_ShouldReturnWeaponTypeInWeaponSlot()
-        {
-            // Arrange
-            Warrior warrior = new Warrior();
-            Weapon testAxe = new Weapon()
-            {
-                Name = "Common axe",
-                RequiredLevel = 1,
-                Slot = Slot.Weapon,
-                WeaponType = Weapons.Axe,
-                WeaponAttributes = new WeaponAttributes() { AttackSpeed = 1.1, Damage = 7 }
-            };
-            Weapon expected = testAxe;
-
-            // Act
-            warrior.Items.AddItem(expected);
-            var actual = warrior.Items.GetWeapon();
-            // Assert
-            Assert.Equal(expected, actual);
-        }
-
         [Fact]
         public void Equip_EquipWarriorWithWeapon_ShouldReturnIncreasedCharacterDPS()
         {
@@ -255,8 +260,34 @@ namespace Module_1_AssignmentTests
             Assert.Equal(expected, actual);
         }
 
+        #endregion
+
         [Fact]
-        public void Weapon_MakeNewWeapon_ShouldReturnWeaponDPSAttackSpeedMultipliedByDamage()
+        public void AddItem_AddItemToWarriorWithWeapon_ShouldReturnWeaponFromWeaponSlot()
+        {
+            // Arrange
+            Warrior warrior = new Warrior();
+            Weapon testAxe = new Weapon()
+            {
+                Name = "Common axe",
+                RequiredLevel = 1,
+                Slot = Slot.Weapon,
+                WeaponType = Weapons.Axe,
+                WeaponAttributes = new WeaponAttributes() { AttackSpeed = 1.1, Damage = 7 }
+            };
+            Weapon expected = testAxe;
+
+            // Act
+            warrior.Items.AddItem(expected);
+            var actual = warrior.Items.GetWeapon();
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+       
+
+        [Fact]
+        public void WeaponDPS_CreateNewNewWeapon_ShouldReturnWeaponDPSAttackSpeedMultipliedByDamage()
         {
             // Arrange
             double attackSpeed = 1.1;
@@ -302,31 +333,6 @@ namespace Module_1_AssignmentTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void Equip_EquipWarriorWithArmour_ShouldReturnIncreasedTotalPrimaryAttributeVitality()
-        {
-             // Arrange
-
-            Warrior warrior = new Warrior();
-            Armour testPlateBody = new Armour()
-            {
-                Name = "Common plate body armour",
-                RequiredLevel = 1,
-                Slot = Slot.Body,
-                ArmourType = Armours.Plate,
-                PrimaryAttributes = new PrimaryAttribute() { Vitality = 2, Strength = 1 }
-            };
-
-            int initialValue = 10;
-            int addedValue = 2;
-            int expected = initialValue + addedValue;
-
-            // Act
-            warrior.Equip(testPlateBody);
-            int actual = warrior.TotalPrimaryAttributes.Vitality;
-
-            // Assert
-            Assert.Equal(expected, actual);
-        }
+       
     }
 }

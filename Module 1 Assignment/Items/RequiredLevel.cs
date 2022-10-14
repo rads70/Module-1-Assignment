@@ -9,6 +9,13 @@ namespace Module_1_Assignment.Items
 {
     public class RequiredLevel
     {
+        /// <summary>
+        /// Checks required level of item against character level.
+        /// </summary>
+        /// <param name="equipment"> Equipment Item</param>
+        /// <param name="characterLevel"> Character level property</param>
+        /// <exception cref="InvalidWeaponException"></exception>
+        /// <exception cref="InvalidArmourException"></exception>
         public static void CheckLevel (Item equipment, int characterLevel)
         {
             if (equipment.RequiredLevel > characterLevel)
