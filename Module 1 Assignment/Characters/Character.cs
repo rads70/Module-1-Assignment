@@ -73,11 +73,9 @@ namespace Module_1_Assignment.Characters
         public void CalculateTotalAttributes()
         {
 
-            PrimaryAttribute armourAttributes = new PrimaryAttribute();
             // Add all primary atttributes from armour
-            armourAttributes = Items.GetArmour(Slot.Head).PrimaryAttributes + Items.GetArmour(Slot.Legs).PrimaryAttributes + Items.GetArmour(Slot.Body).PrimaryAttributes;
-
-            TotalPrimaryAttributes =  PrimaryAttributes + armourAttributes;
+             
+            TotalPrimaryAttributes =  PrimaryAttributes + Items.GetArmour(Slot.Head).PrimaryAttributes + Items.GetArmour(Slot.Legs).PrimaryAttributes + Items.GetArmour(Slot.Body).PrimaryAttributes;
 
             // Set secondary attributes from Total attributes
             SecondaryAttributes.Health = TotalPrimaryAttributes.Vitality * 10;
